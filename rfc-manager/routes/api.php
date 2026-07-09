@@ -1,10 +1,11 @@
 <?php
 
-return [
-    'prefix' => 'api',
-    'domain' => null,
-    'middleware' => [
-        'api',
-        \Illuminate\Routing\Middleware\SubstituteBindings::class,
-    ],
-];
+use Illuminate\Support\Facades\Route;
+
+Route::get('/health', function () {
+    return response()->json([
+        'status' => 'ok',
+        'app' => config('app.name'),
+        'time' => now()->toIso8601String(),
+    ]);
+});
